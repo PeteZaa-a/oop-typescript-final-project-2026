@@ -7,9 +7,19 @@
   "license": "MIT",
   "contributors": [
     {
-      "fullname": "John Doe",
+      "fullname": "ภาสกร ชีรชานนท์",
       "username": "username1",
-      "studentId": "12345678"
+      "studentId": "68010862"
+    },
+        {
+      "fullname": "ภาสกร ศ",
+      "username": "username1",
+      "studentId": "6801086"
+    },
+        {
+      "fullname": "ภาสวุฒิ อ",
+      "username": "username1",
+      "studentId": "6801086"
     }
   ],
   "project": {
