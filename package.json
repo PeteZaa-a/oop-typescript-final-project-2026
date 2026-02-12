@@ -8,26 +8,26 @@
   "contributors": [
     {
       "fullname": "ภาสกร ชีรชานนท์",
-      "username": "username1",
+      "username": "PeteZaa-a",
       "studentId": "68010862"
     },
         {
-      "fullname": "ภาสกร ศ",
-      "username": "username1",
-      "studentId": "6801086"
+      "fullname": "ภาสกร ศิลปไพบูลย์",
+      "username": "Passakenz",
+      "studentId": "68010864"
     },
         {
-      "fullname": "ภาสวุฒิ อ",
-      "username": "username1",
-      "studentId": "6801086"
+      "fullname": "ภาสวุฒิ อิ่มสำราญ",
+      "username": "68010867",
+      "studentId": "68010867"
     }
   ],
   "project": {
     "model": {
-      "id": null,
-      "name": null
+      "id": 3,
+      "name": "Event Management System"
     },
-    "sumStudentId": null
+    "sumStudentId": 204032593
   },
   "scripts": {
     "build": "nest build",
