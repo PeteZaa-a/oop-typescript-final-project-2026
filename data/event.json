@@ -1,0 +1,6 @@
+{
+    "event": [
+        { "eventname": "fatherday", "location": "school", "date": "5 december 2199"},
+        { "eventname": "valentineday", "location": "hotel", "date": "14 february 2199"}
+    ]
+}
