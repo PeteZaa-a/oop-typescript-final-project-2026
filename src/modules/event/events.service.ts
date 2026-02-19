@@ -19,5 +19,13 @@ export class EventsService {
         return eventsData.event
     }
     
+    create(createDtoEvent: createDtoEvent):createDtoEvent {
+        const data = this.readDatabase()
+        data.push(createDtoEvent)
+
+        const toString = JSON.stringify(data, null, 2)
+        fs.writeFileSync(this.databasePath, toString, 'utf8')
+        return createDtoEvent
+    }
     
 }   
