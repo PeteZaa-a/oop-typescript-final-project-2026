@@ -1,6 +1,24 @@
-{
-    "event": [
-        { "eventname": "fatherday", "location": "school", "date": "5 december 2199"},
-        { "eventname": "valentineday", "location": "hotel", "date": "14 february 2199"}
-    ]
-}
+[
+  {
+    "eventname": "fatherday",
+    "location": "school",
+    "date": "5 december 2199"
+  },
+  {
+    "eventname": "valentineday",
+    "location": "hotel",
+    "date": "14 february 2199"
+  },
+  {
+    "eventname": "newyearday",
+    "location": "home",
+    "time": "12:58",
+    "date": "31 december 2001"
+  },
+  {
+    "eventname": "ิbirthday",
+    "location": "home",
+    "time": "13.02",
+    "date": "1 january 1999"
+  }
+]

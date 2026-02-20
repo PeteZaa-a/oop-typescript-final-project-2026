@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator"
+import { IsEnum, IsNotEmpty, IsString } from "class-validator"
 
 export enum eventLocation {
     SCHOOL = "school",
@@ -10,7 +10,7 @@ export enum eventLocation {
 export class createDtoEvent {
     @IsString()
     @IsNotEmpty()
-    name!: string
+    eventname!: string
 
     @IsString()
     @IsNotEmpty()
@@ -20,7 +20,9 @@ export class createDtoEvent {
     @IsNotEmpty()
     time!: string
     
-
+    @IsEnum(eventLocation)
+    @IsNotEmpty()
     location!: eventLocation
 }
+
 
