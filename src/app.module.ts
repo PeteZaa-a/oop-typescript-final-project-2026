@@ -10,3 +10,4 @@ import { ParticipantModule } from './modules/participant/participant.module';
 })
 
 export class AppModule {}
+

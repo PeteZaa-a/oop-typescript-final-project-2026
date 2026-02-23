@@ -44,9 +44,9 @@ export class EventsService {
     }
     
     // ใช้ชื่อกิจกรรม (เลือกกิจกรรม) เพื่อไปเปลี่ยนข้อมูลอื่น
-    update(eventname: string, updateDto: UpdateDtoEvent) {
+    update(eventName: string, updateDto: UpdateDtoEvent) {
         const event = this.findAll()
-        const index = event.findIndex((e:createDtoEvent) => e.eventname === eventname)
+        const index = event.findIndex((e:createDtoEvent) => e.eventName === eventName)
     
         if (index === -1) {
             throw new NotFoundException("not found")
@@ -64,16 +64,16 @@ export class EventsService {
         return event[index]
     }
 
-    remove(eventname: string) {
+    remove(eventName: string) {
         const event = this.findAll()
-        const index = event.findIndex((e: createDtoEvent) => e.eventname === eventname)
+        const index = event.findIndex((e: createDtoEvent) => e.eventName === eventName)
 
         if (index === -1) {
             throw new NotFoundException("cannot delete because not found event name")
         }
         
 
-        const newArrayEventNotDel = event.filter((e: createDtoEvent) => e.eventname !== eventname)
+        const newArrayEventNotDel = event.filter((e: createDtoEvent) => e.eventName !== eventName)
         const toString = JSON.stringify(newArrayEventNotDel,null,2)
         fs.writeFileSync(this.databasePath, toString, "utf-8")
         return "deleted"
