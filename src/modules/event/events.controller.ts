@@ -2,21 +2,26 @@ import { Body, Controller, Get, Post, Patch, Param, Delete } from "@nestjs/commo
 import { createDtoEvent } from "./dto/create.event.dto"
 import { EventsService } from "./events.service";
 import { UpdateDtoEvent } from "./dto/update.event.dto";
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
+@ApiTags("events")
 @Controller("events")
 export class EventsController {
     constructor(private readonly eventsService: EventsService) {}
 
     @Get()
+    @ApiOperation({ summary: "Get all events"})
     findAllEvents() {
         return this.eventsService.findAll()
     }
     
+    @ApiOperation({ summary: "create new events"})
     @Post()
     createEvent(@Body() createDtoEvent: createDtoEvent) {
         return this.eventsService.create(createDtoEvent)
     }
     
+    @ApiOperation({ summary: "update events"})
     @Patch(":eventname")
     update(
         @Param("eventname") eventname: string,
@@ -25,6 +30,7 @@ export class EventsController {
         return this.eventsService.update(eventname, updateDto)
     }
 
+    @ApiOperation({ summary: "delete event"})
     @Delete(":eventname")
     remove(@Param("eventname") eventname: string) {
         return this.eventsService.remove(eventname)
