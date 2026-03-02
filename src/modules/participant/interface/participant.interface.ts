@@ -7,5 +7,6 @@ export interface IParticipant {
     age: number;
     sex: participantSex;
     status: participantStatus;
+    joinEvent: string;
 
 }

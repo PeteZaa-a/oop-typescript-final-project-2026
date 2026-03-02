@@ -1,5 +1,5 @@
 [
-  { "id": 1, "name": "James Smith", "age": 28, "sex": "Male", "status": "confirm" },
+  { "id": 1, "name": "James Smith", "age": 28, "sex": "Male", "status": "confirm" ,"joinEvent":"fatherday"},
   { "id": 2, "name": "Maria Garcia", "age": 34, "sex": "Female", "status": "pending" },
   { "id": 3, "name": "Robert Johnson", "age": 45, "sex": "Male", "status": "cancel" },
   { "id": 4, "name": "Emma Wilson", "age": 22, "sex": "Female", "status": "confirm" },

@@ -15,6 +15,10 @@ export class CreateParticipantDto{
 
     @IsEnum(participantStatus)
     status!: participantStatus;
+
+    @IsString()
+    @IsNotEmpty()
+    joinEvent! : string;
 }
 
 export class updateParticipantDto{
@@ -34,4 +38,5 @@ export class updateParticipantDto{
     @IsEnum(participantStatus)
     @IsOptional()
     status?: participantStatus;
+
 }   
