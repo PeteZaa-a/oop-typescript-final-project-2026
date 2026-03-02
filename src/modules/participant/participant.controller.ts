@@ -3,6 +3,7 @@ import { ParticipantService } from './participant.service';
 import { CreateParticipantDto, updateParticipantDto } from './dto/participant.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
+
 @ApiTags('participants')
 @Controller('participants')
 export class ParticipantController{
@@ -44,6 +45,12 @@ export class ParticipantController{
     @ApiOperation({ summary: 'ลบผู้เข้าร่วมตาม ID' })
     async remove(@Param('id') id: string) {
         await this.participantService.remove(id);
+    }
+    
+    @Get("event/:eventname")
+    @ApiOperation({ summary: " see people join event"})
+    async getByEvent(@Param("eventname") eventname: string) {
+        return await this.participantService.findParticipantsByEvent(eventname)
     }
 }
     

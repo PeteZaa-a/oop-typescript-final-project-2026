@@ -81,4 +81,10 @@ export class ParticipantService {
     await this.writeDB(filtered);
     return { message: 'ลบข้อมูลสำเร็จ' };
   }
+  async findParticipantsByEvent(eventname:string): Promise<IParticipant[]> {
+    const allParticipants = await this.readDB()
+
+    const result = allParticipants.filter(p => p.joinEvent === eventname)
+    return result
+  }
 }
