@@ -3,12 +3,14 @@ import { IParticipant } from './interface/participant.interface';
 import { CreateParticipantDto, updateParticipantDto } from './dto/participant.dto';
 import * as fs from 'fs/promises';
 import { v4 as uuid } from 'uuid';
+import { EventsService } from '../event/events.service';
 
 @Injectable()
 export class ParticipantService {
   private readonly dbPath = 'participants.json';
 
-  
+  constructor(private readonly eventService: EventsService) { }
+
   private async readDB(): Promise<IParticipant[]> {
     try {
       const data = await fs.readFile(this.dbPath, 'utf8');
@@ -81,10 +83,12 @@ export class ParticipantService {
     await this.writeDB(filtered);
     return { message: 'ลบข้อมูลสำเร็จ' };
   }
-  async findParticipantsByEvent(eventname:string): Promise<IParticipant[]> {
-    const allParticipants = await this.readDB()
+async findParticipantsByEvent(eventname: string): Promise<IParticipant[]> {
+    const allParticipants = await this.readDB();
 
-    const result = allParticipants.filter(p => p.joinEvent === eventname)
-    return result
-  }
+    const result = allParticipants.filter(p => p.joinEvent && p.joinEvent.trim() === eventname.trim());
+    
+    return result;
 }
+}
+
