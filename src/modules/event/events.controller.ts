@@ -3,7 +3,6 @@ import { createDtoEvent } from "./dto/create.event.dto"
 import { EventsService } from "./events.service";
 import { UpdateDtoEvent } from "./dto/update.event.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { eventNames } from "process";
 
 @ApiTags("events")
 @Controller("events")

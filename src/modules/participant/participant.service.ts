@@ -90,5 +90,22 @@ async findParticipantsByEvent(eventname: string): Promise<IParticipant[]> {
     
     return result;
 }
+
+async findWithFilter(eventname?: string, sex?: string, status?: string): Promise<IParticipant[]> {
+  let participant = await this.readDB()
+  
+  if (eventname) {
+    participant = participant.filter(p => p.joinEvent && p.joinEvent.trim() === eventname.trim())
+  }
+  if (sex) {
+    participant = participant.filter(p => p.sex && p.sex.trim() === sex.trim()) 
+  }
+  if (status) {
+    participant = participant.filter(p => p.status && p.status.trim() === status.trim())
+  }
+
+  return participant
+}
+
 }
 

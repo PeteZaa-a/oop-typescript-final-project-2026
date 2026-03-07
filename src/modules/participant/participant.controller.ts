@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Patch, Delete, Body, Param, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Put, Patch, Delete, Body, Param, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { ParticipantService } from './participant.service';
 import { CreateParticipantDto, updateParticipantDto } from './dto/participant.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
@@ -16,11 +16,11 @@ export class ParticipantController{
         return await this.participantService.create(dto);
     }
 
-    @Get()
-    @ApiOperation({ summary: 'ดึงข้อมูลผู้เข้าร่วมทั้งหมด' })
-    async findAll() {
-        return await this.participantService.findAll();
-    }
+    // @Get()
+    // @ApiOperation({ summary: 'ดึงข้อมูลผู้เข้าร่วมทั้งหมด' })
+    // async findAll() {
+    //     return await this.participantService.findAll();
+    // }
 
     @Get(':id')
     @ApiOperation({ summary: 'ดึงข้อมูลผู้เข้าร่วมตาม ID' })
@@ -51,6 +51,16 @@ export class ParticipantController{
     @ApiOperation({ summary: "see people join event"})
     async getByEvent(@Param("eventname") eventname: string) {
         return await this.participantService.findParticipantsByEvent(eventname)
+    }
+
+    @Get()
+    @ApiOperation({ summary: "filter a participant" })
+    async findAll(
+        @Query("event") eventname?: string,
+        @Query("sex") sex?: string,
+        @Query("status") status?: string,
+    ) {
+        return await this.participantService.findWithFilter(eventname, sex, status)
     }
 }
     
