@@ -1,28 +1,26 @@
 import { createDtoEvent } from "./dto/create.event.dto";
-import { Injectable, NotFoundException } from "@nestjs/common"
+import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common"
 import { join } from "path";
 import process from "process";
-import fs from "fs-extra"
+import * as fs from "fs-extra"
 import { UpdateDtoEvent } from "./dto/update.event.dto";
 
 @Injectable()
 export class EventsService {
   private readonly databasePath = join(process.cwd(), "event.json")
-  private readDatabase() {
+  private async readDatabase(): Promise<createDtoEvent[]> {
     try {
-      const data = fs.readFileSync(this.databasePath, 'utf8')
+      const data = await fs.readFile(this.databasePath, 'utf8')
       return JSON.parse(data) as createDtoEvent[]
     } catch (e) {
-      if (e instanceof Error) {
-        return []
-      }
+      console.error("database error")
+      return []
     }
   }
-
-  findAll(): createDtoEvent[] {
+async findAll(): Promise<createDtoEvent[]> {
     try {
-      const eventsData = this.readDatabase()
-      return eventsData as createDtoEvent[]
+      return await this.readDatabase()
+      //return eventsData as createDtoEvent[]
 
     } catch (e) {
       if (e instanceof Error) {
@@ -33,23 +31,25 @@ export class EventsService {
       return []
     }
   }
-
-  create(DtoEvent: createDtoEvent) {
-    const data = this.findAll()
+async create(DtoEvent: createDtoEvent): Promise<createDtoEvent> {
+    const data = await this.findAll()
     data.push(DtoEvent)
 
-    const toString = JSON.stringify(data, null, 2)
-    fs.writeFileSync(this.databasePath, toString, 'utf8')
-    return DtoEvent
+    try {
+      const toString = JSON.stringify(data, null, 2)
+      await fs.writeFile(this.databasePath, toString, 'utf8')
+      return DtoEvent
+    } catch (e) {
+      throw new InternalServerErrorException("cannot create events")
+    }
   }
-
-  // ใช้ชื่อกิจกรรม (เลือกกิจกรรม) เพื่อไปเปลี่ยนข้อมูลอื่น
-  update(eventName: string, updateDto: UpdateDtoEvent) {
-    const event = this.findAll()
-    const index = event.findIndex((e: createDtoEvent) => e.eventName === eventName)
+// ใช้ชื่อกิจกรรม (เลือกกิจกรรม) เพื่อไปเปลี่ยนข้อมูลอื่น
+  async update(eventname: string, updateDto: UpdateDtoEvent): Promise<createDtoEvent> {
+    const event = await this.findAll()
+    const index = event.findIndex((e: createDtoEvent) => e.eventName === eventname)
 
     if (index === -1) {
-      throw new NotFoundException("not found")
+      throw new NotFoundException(cannot find ${eventname} to update)
     }
 
     const updatedEvent: createDtoEvent = {
@@ -63,9 +63,8 @@ export class EventsService {
     fs.writeFileSync(this.databasePath, toString, "utf-8")
     return event[index]
   }
-
-  remove(eventName: string) {
-    const event = this.findAll()
+async remove(eventName: string) {
+    const event = await this.findAll()
     const index = event.findIndex((e: createDtoEvent) => e.eventName === eventName)
 
     if (index === -1) {
@@ -78,15 +77,14 @@ export class EventsService {
     fs.writeFileSync(this.databasePath, toString, "utf-8")
     return "deleted"
   }
-
-  async getEventsByName(eventname: string): Promise<createDtoEvent> {
+async getEventsByName(eventname: string): Promise<createDtoEvent> {
     const events = await this.findAll()
 
     const event = events.find(e => e.eventName.trim() === eventname.trim())
 
     if (!event) {
-      throw new NotFoundException(`ืcannot find ${eventname}`)
+      throw new NotFoundException(ืcannot find ${eventname})
     }
     return event
   }
-}  
+}
