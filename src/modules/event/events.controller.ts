@@ -11,34 +11,54 @@ export class EventsController {
 
   @Get()
   @ApiOperation({ summary: "Get all events" })
-  findAllEvents() {
-    return this.eventsService.findAll()
+  async findAllEvents() {
+    const getData = await this.eventsService.findAll()
+    return {
+      success: true,
+      message: "successful to get all data",
+      data: getData
+    }
   }
-
-  @ApiOperation({ summary: "create new events" })
+@ApiOperation({ summary: "create new events" })
   @Post()
-  createEvent(@Body() createDtoEvent: createDtoEvent) {
-    return this.eventsService.create(createDtoEvent)
+  async createEvent(@Body() createDtoEvent: createDtoEvent) {
+    const createData = await this.eventsService.create(createDtoEvent)
+    return {
+      success: true,
+      message: "create event successful",
+      data: createData
+    }
   }
-
-  @ApiOperation({ summary: "update events" })
+@ApiOperation({ summary: "update events" })
   @Patch(":eventname")
-  update(
+  async update(
     @Param("eventname") eventname: string,
     @Body() updateDto: UpdateDtoEvent
   ) {
-    return this.eventsService.update(eventname, updateDto)
+    const updateData = await this.eventsService.update(eventname, updateDto)
+    return {
+      success: true,
+      message: updated events ${eventname} successful,
+      data: updateData
+    }
   }
-
-  @ApiOperation({ summary: "delete event" })
+@ApiOperation({ summary: "delete events" })
   @Delete(":eventname")
-  remove(@Param("eventname") eventname: string) {
-    return this.eventsService.remove(eventname)
+  async remove(@Param("eventname") eventname: string) {
+    const delEvent = await this.eventsService.remove(eventname)
+    return {
+      success: true,
+      message: deleted events ${eventname} successful,
+      data: delEvent
+    }
   }
-
-  @Get(":eventname")
+@Get(":eventname")
   async getEventsByName(@Param("eventname") eventname: string) {
-    return await this.eventsService.getEventsByName(eventname)
+    const getEventFromName = await this.eventsService.getEventsByName(eventname)
+    return {
+      success: true,
+      message: success to get ${eventname},
+      data: getEventFromName
+    }
   }
 }
-
