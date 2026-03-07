@@ -47,7 +47,7 @@ export class ParticipantController{
         await this.participantService.remove(id);
     }
     
-    @Get('event/:eventname')
+    @Get('events/:eventname')
     @ApiOperation({ summary: "see people join event"})
     async getByEvent(@Param("eventname") eventname: string) {
         return await this.participantService.findParticipantsByEvent(eventname)

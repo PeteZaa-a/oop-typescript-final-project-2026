@@ -78,4 +78,15 @@ export class EventsService {
         fs.writeFileSync(this.databasePath, toString, "utf-8")
         return "deleted"
     }
-}   
+
+    async getEventsByName(eventname: string): Promise<createDtoEvent> {
+        const events = await this.findAll()
+
+        const event = events.find(e => e.eventName.trim() === eventname.trim())
+
+        if (!event) {
+            throw new NotFoundException(`ืcannot find ${eventname}`)
+        }
+        return event
+    }
+}  

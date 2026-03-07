@@ -3,6 +3,7 @@ import { createDtoEvent } from "./dto/create.event.dto"
 import { EventsService } from "./events.service";
 import { UpdateDtoEvent } from "./dto/update.event.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { eventNames } from "process";
 
 @ApiTags("events")
 @Controller("events")
@@ -35,7 +36,10 @@ export class EventsController {
     remove(@Param("eventname") eventname: string) {
         return this.eventsService.remove(eventname)
     }
-    
 
+    @Get(":eventname")
+    async getEventsByName(@Param("eventname") eventname: string) { 
+        return await this.eventsService.getEventsByName(eventname)
+    } 
     }
 
