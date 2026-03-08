@@ -84,6 +84,11 @@ export class ParticipantController {
     @Query("sex") sex?: string,
     @Query("status") status?: string,
   ) {
-    return await this.participantService.findWithFilter(eventname, sex, status)
+    const query = await this.participantService.findWithFilter(eventname, sex, status) 
+      return {
+        success: true,
+        message: `successful`,
+        data: query
+    }
   }
 }
