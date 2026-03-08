@@ -13,49 +13,68 @@ export class ParticipantController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'สร้างผู้เข้าร่วมใหม่' })
   async create(@Body() dto: CreateParticipantDto) {
-    const result = await this.participantService.create(dto)
+    const createdParticipant = await this.participantService.create(dto)
     return {
       success: true,
-      message: "successful to get all data",
-      data: result
+      message: `successful to create participant `,
+      data: createdParticipant
     }
   }
-
-  // @Get()
-  // @ApiOperation({ summary: 'ดึงข้อมูลผู้เข้าร่วมทั้งหมด' })
-  // async findAll() {
-  //     return await this.participantService.findAll();
-  // }
 
   @Get(':id')
   @ApiOperation({ summary: 'ดึงข้อมูลผู้เข้าร่วมตาม ID' })
   async findOne(@Param('id') id: string) {
-    return await this.participantService.findOne(id);
+    const getId = await this.participantService.findOne(id);
+    return {
+      success: true,
+      message: "successful to get data by id",
+      data: getId
+    }
   }
 
   @Put(':id')
   @ApiOperation({ summary: 'อัปเดตข้อมูลผู้เข้าร่วมทั้งหมดตาม ID' })
   async update(@Param('id') id: string, @Body() dto: CreateParticipantDto) {
-    return await this.participantService.update(id, dto);
+    const updateAllId = await this.participantService.update(id, dto);
+    return {
+      success: true,
+      message: `successful to update participant with id: ${id}`,
+      data: updateAllId
+    }
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'อัปเดตข้อมูลผู้เข้าร่วมบางส่วนตาม ID' })
   async partialUpdate(@Param('id') id: string, @Body() dto: updateParticipantDto) {
-    return await this.participantService.partialUpdate(id, dto);
+    const partialUpdateId = await this.participantService.partialUpdate(id, dto);
+    return {
+      success: true,
+      message: `successful to partial update participant with id: ${id}`,
+      data: partialUpdateId
+    }
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'ลบผู้เข้าร่วมตาม ID' })
   async remove(@Param('id') id: string) {
-    await this.participantService.remove(id);
+   const delParticipants = await this.participantService.remove(id);
+   return {
+     success: true,
+     message: `successful to delete participant with id: ${id}`,
+     data: delParticipants
+   }
   }
 
   @Get('events/:eventname')
   @ApiOperation({ summary: "see people join event" })
   async getByEvent(@Param("eventname") eventname: string) {
-    return await this.participantService.findParticipantsByEvent(eventname)
+    const getPeopleInEvent = await this.participantService.findParticipantsByEvent(eventname);
+    return {
+      success: true,
+      message: `successful to get participants for event: ${eventname}`,
+      data: getPeopleInEvent
+    }
   }
 
   @Get()
