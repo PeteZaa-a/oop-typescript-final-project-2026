@@ -1,6 +1,6 @@
-Base URL: `http://localhost:3000`<br/>
+ ## Base URL: `http://localhost:3000`<br/>
 
-Event Model: .json<br/>
+## Event Model: .json<br/>
 {<br/>
 "eventName": "string",<br/>
 "date": "string",<br/>
@@ -8,7 +8,7 @@ Event Model: .json<br/>
 "location": "school | hotel | silom | home | Chulalongkorn University"<br/>
 }<br/>
 
-Participant Model: .json<br/>
+## Participant Model: .json<br/>
 {<br/>
   "id": "string (UUID)",<br/>
   "name": "string",<br/>
@@ -18,27 +18,27 @@ Participant Model: .json<br/>
   "joinEvent": "string (event name)"<br/>
 }<br/>
 
-API Response Model: .json<br/>
+## API Response Model: .json<br/>
 {<br/>
   "success": "boolean",<br/>
   "message": "string",<br/>
   "data": "T | null"<br/>
 }<br/>
 
-Events Module:<br/>
-1. Get All Events<br/>
+## Events Module:<br/>
+### 1. Get All Events<br/>
 Method: `GET`<br/>
 Endpoint: `/events`<br/>
 Description: Retrieve all events<br/>
 Parameters:None<br/>
 
-2. Get Event by Name<br/>
+### 2. Get Event by Name<br/>
  Method: `GET`<br/>
  Endpoint: `/events/:eventname`<br/>
  Description: Retrieve a specific event by name<br/>
  Parameters:`eventname` (path, string): The name of the event<br/>
 
- 3. Create New Event<br/>
+ ### 3. Create New Event<br/>
  Method: `POST`<br/>
  Endpoint: `/events`<br/>
  Description: Create a new event<br/>
@@ -50,7 +50,7 @@ Parameters:None<br/>
     "location": "school | hotel | silom | home | Chulalongkorn University (required)"<br/>
   }<br/>
  
- 4. Update Event (Full)<br/>
+ ### 4. Update Event (Full)<br/>
  Method: `PUT`<br/>
  Endpoint: `/events/:eventname`<br/>
  Description: Update entire event data<br/>
@@ -62,7 +62,7 @@ Parameters:None<br/>
     "location": "school | hotel | silom | home | Chulalongkorn University (required)"<br/>
 }<br/>
  
- 5. Update Event (Partial)<br/>
+ ### 5. Update Event (Partial)<br/>
  Method: `PATCH`<br/>
  Endpoint: `/events/:eventname`<br/>
  Description: Update specific of a event<br/>
@@ -74,14 +74,14 @@ Parameters:None<br/>
     "location": "school | hotel | silom | home | Chulalongkorn University"<br/>
 }<br/>
 
- 6. Delete Event<br/>
+ ### 6. Delete Event<br/>
  Method: `DELETE`<br/>
  Endpoint: `/events/:eventname`<br/>
  Description: Delete an event by name<br/>
  Parameters:`eventname` (path, string): The name of the event to delete<br/>
  
- Participants Module<br/>
- 1. Create Participant<br/>
+##  Participants Module<br/>
+ ### 1. Create Participant<br/>
  Method: `POST`<br/>
  Endpoint:`/participants`<br/>
  Description:  Create a new participant<br/>
@@ -94,13 +94,13 @@ Parameters:None<br/>
     "joinEvent": "string (required)"<br/>
 }<br/>
 
- 2. Get Participant by ID<br/>
+ ### 2. Get Participant by ID<br/>
  Method: `GET`<br/>
  Endpoint:`/participants/:id`<br/>
  Description:  Retrieve a specific participant by ID<br/>
  Parameters:`id` (path, string): The UUID of the participant<br/>
 
-3. Update Participant (Full)<br/>
+### 3. Update Participant (Full)<br/>
 Method: `PUT`<br/>
 Endpoint: `/participants/:id`<br/>
 Description: Update entire participant data<br/>
@@ -114,7 +114,7 @@ Request Body:(All fields required) .json<br/>
     "joinEvent": "string (required)"<br/>
 }<br/>
 
-4. Update Participant (Partial)<br/>
+### 4. Update Participant (Partial)<br/>
 Method: `PATCH`<br/>
 Endpoint: `/participants/:id`<br/>
 Description: Update specific fields of a participant<br/>
@@ -127,7 +127,7 @@ Request Body:(All fields optional) .json<br/>
     "status": "confirmed | cancelled | pending"<br/>
 }<br/>
 
-5. Delete Participant<br/>
+### 5. Delete Participant<br/>
 Method: `DELETE`<br/>
 Endpoint: `/participants/:id`<br/>
 Description: Delete a participant by ID<br/>
@@ -138,13 +138,13 @@ Error Response:<br/>
 Status: 404<br/>
 Message: ไม่พบข้อมูลที่จะลบ (Not found data to delete)<br/>
 
-6. Get Participants by Event<br/>
+### 6. Get Participants by Event<br/>
 Method: `GET`<br/>
 Endpoint: `/participants/events/:eventname`<br/>
 Description: Get all participants for a specific event<br/>
 Parameters: `eventname` (path, string): The name of the event<br/>
 
-7. Filter Participants<br/>
+### 7. Filter Participants<br/>
 Method:`GET`<br/>
 Endpoint: `/participants`<br/>
 Description: Get participants with optional filters<br/>
