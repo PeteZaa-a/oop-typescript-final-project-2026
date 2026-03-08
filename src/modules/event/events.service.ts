@@ -3,7 +3,7 @@ import { Injectable, InternalServerErrorException, NotFoundException } from "@ne
 import { join } from "path";
 import process from "process";
 import * as fs from "fs-extra"
-import { UpdateDtoEvent } from "./dto/update.event.dto";
+import { UpdateDtoEvent, UpdateDtoEventAll } from "./dto/update.event.dto";
 
 @Injectable()
 export class EventsService {
@@ -44,7 +44,7 @@ async create(DtoEvent: createDtoEvent): Promise<createDtoEvent> {
     }
   }
 // ใช้ชื่อกิจกรรม (เลือกกิจกรรม) เพื่อไปเปลี่ยนข้อมูลอื่น ใช้กับอัพเดททั้งหมด(Put) และอัพเดทบางอัน(Patch)
-  async update(eventname: string, updateDto: UpdateDtoEvent | createDtoEvent): Promise<createDtoEvent> {
+  async update(eventname: string, updateDto: UpdateDtoEvent | UpdateDtoEventAll): Promise<createDtoEvent> {
     const event = await this.findAll()
     const index = event.findIndex((e: createDtoEvent) => e.eventName === eventname)
 
@@ -60,7 +60,7 @@ async create(DtoEvent: createDtoEvent): Promise<createDtoEvent> {
     event[index] = updatedEvent
 
     const toString = JSON.stringify(event, null, 2)
-    await fs.writeFileSync(this.databasePath, toString, "utf-8")
+    await fs.writeFile(this.databasePath, toString, "utf-8")
     return event[index]
   }
 async remove(eventName: string) {
@@ -74,7 +74,7 @@ async remove(eventName: string) {
 
     const newArrayEventNotDel = event.filter((e: createDtoEvent) => e.eventName !== eventName)
     const toString = JSON.stringify(newArrayEventNotDel, null, 2)
-    fs.writeFileSync(this.databasePath, toString, "utf-8")
+    fs.writeFile(this.databasePath, toString, "utf-8")
     return "deleted"
   }
 async getEventsByName(eventname: string): Promise<createDtoEvent> {

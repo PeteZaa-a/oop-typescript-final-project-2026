@@ -40,3 +40,23 @@ export class updateParticipantDto{
     status?: participantStatus;
 
 }   
+
+export class updateParticipantDtoAll {
+        @IsString()
+    @IsNotEmpty()
+    name!: string;
+
+    @IsNumber()
+    @Min(0)
+    age!: number;
+
+    @IsEnum(participantSex)
+    sex!: participantSex;
+
+    @IsEnum(participantStatus)
+    status!: participantStatus;
+
+    @IsString()
+    @IsNotEmpty()
+    joinEvent! : string;
+}

@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Patch, Param, Delete, Put, HttpCode, HttpStatus } from "@nestjs/common";
 import { createDtoEvent } from "./dto/create.event.dto"
 import { EventsService } from "./events.service";
-import { UpdateDtoEvent } from "./dto/update.event.dto";
+import { UpdateDtoEventAll, UpdateDtoEvent } from "./dto/update.event.dto";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { ApiResponse } from "@/common/interfaces/ApiResponse.Interfaces";
 
@@ -26,8 +26,8 @@ export class EventsController {
   @ApiOperation({ summary: "create new events" })
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async createEvent(@Body() createDtoEvent: createDtoEvent): Promise<ApiResponse<createDtoEvent>> {
-    const createData = await this.eventsService.create(createDtoEvent)
+  async createEvent(@Body() createdtoevent: createDtoEvent): Promise<ApiResponse<createDtoEvent>> {
+    const createData = await this.eventsService.create(createdtoevent)
     return {
       success: true,
       message: "create event successful",
@@ -53,9 +53,9 @@ export class EventsController {
   @ApiOperation({ summary: "update events (แก้ทั้งหมด)" })
   @Put(":eventname")
   @HttpCode(HttpStatus.OK)
-  async updatAll(
+  async updateAll(
     @Param("eventname") eventname: string,
-    @Body() updateDto: createDtoEvent
+    @Body() updateDto: UpdateDtoEventAll
   ): Promise<ApiResponse<createDtoEvent>> {
     const result = await this.eventsService.update(eventname, updateDto)
     return {
@@ -67,7 +67,7 @@ export class EventsController {
 
   @ApiOperation({ summary: "delete events" })
   @Delete(":eventname")
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @HttpCode(HttpStatus.OK)
   async remove(@Param("eventname") eventname: string): Promise<ApiResponse<string>> {
     const delEvent = await this.eventsService.remove(eventname)
     return {
