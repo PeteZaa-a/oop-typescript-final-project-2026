@@ -1,62 +1,67 @@
-import { IsString, IsNotEmpty, IsNumber, IsEnum, Min, IsOptional} from 'class-validator'
+import { IsString, IsNotEmpty, IsNumber, IsEnum, Min, IsOptional } from 'class-validator'
 import { participantSex, participantStatus } from '../participant.enum';
 
-export class CreateParticipantDto{
-    @IsString()
-    @IsNotEmpty()
-    name!: string;
+export class CreateParticipantDto {
+  @IsString()
+  @IsNotEmpty()
+  name!: string;
 
-    @IsNumber()
-    @Min(0)
-    age!: number;
+  @IsNumber()
+  @Min(0)
+  age!: number;
 
-    @IsEnum(participantSex)
-    sex!: participantSex;
+  @IsEnum(participantSex)
+  sex!: participantSex;
 
-    @IsEnum(participantStatus)
-    status!: participantStatus;
+  @IsEnum(participantStatus)
+  status!: participantStatus;
 
-    @IsString()
-    @IsNotEmpty()
-    joinEvent! : string;
+  @IsString()
+  @IsNotEmpty()
+  joinEvent!: string;
 }
 
-export class updateParticipantDto{
-    @IsString()
-    @IsOptional()
-    name?: string;
+export class updateParticipantDto {
+  @IsString()
+  @IsOptional()
+  name?: string;
 
-    @IsNumber()
-    @Min(0)
-    @IsOptional()
-    age?: number;
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  age?: number;
 
-    @IsEnum(participantSex)
-    @IsOptional()
-    sex?: participantSex;
+  @IsEnum(participantSex)
+  @IsOptional()
+  sex?: participantSex;
 
-    @IsEnum(participantStatus)
-    @IsOptional()
-    status?: participantStatus;
+  @IsEnum(participantStatus)
+  @IsOptional()
+  status?: participantStatus;
 
-}   
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  joinEvent!: string;
+
+}
 
 export class updateParticipantDtoAll {
-        @IsString()
-    @IsNotEmpty()
-    name!: string;
+  @IsString()
+  @IsNotEmpty()
+  name!: string;
 
-    @IsNumber()
-    @Min(0)
-    age!: number;
+  @IsNumber()
+  @Min(0)
+  age!: number;
 
-    @IsEnum(participantSex)
-    sex!: participantSex;
+  @IsEnum(participantSex)
+  sex!: participantSex;
 
-    @IsEnum(participantStatus)
-    status!: participantStatus;
+  @IsEnum(participantStatus)
+  status!: participantStatus;
 
-    @IsString()
-    @IsNotEmpty()
-    joinEvent! : string;
+  @IsString()
+  @IsNotEmpty()
+  joinEvent!: string;
 }
