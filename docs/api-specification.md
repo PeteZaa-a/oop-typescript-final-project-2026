@@ -50,10 +50,22 @@ Parameters:None<br/>
     "location": "school | hotel | silom | home | Chulalongkorn University (required)"<br/>
   }<br/>
  
- 4. Update Event<br/>
+ 4. Update Event (Full)<br/>
+ Method: `PUT`<br/>
+ Endpoint: `/events/:eventname`<br/>
+ Description: Update entire event data<br/>
+ Request Body:(All fields required) .json<br/>
+{<br/>
+    "eventName": "string (required)",<br/>
+    "date": "string (required)",<br/>
+    "time": "string (required)",<br/>
+    "location": "school | hotel | silom | home | Chulalongkorn University (required)"<br/>
+}<br/>
+ 
+ 5. Update Event (Partial)<br/>
  Method: `PATCH`<br/>
- Endpoint: `/events`<br/>
- Description: Create a new event<br/>
+ Endpoint: `/events/:eventname`<br/>
+ Description: Update specific of a event<br/>
  Request Body: .json<br/>
 {<br/>
     "eventName": "string",<br/>
@@ -61,8 +73,8 @@ Parameters:None<br/>
     "time": "string",<br/>
     "location": "school | hotel | silom | home | Chulalongkorn University"<br/>
 }<br/>
- 
- 5. Delete Event<br/>
+
+ 6. Delete Event<br/>
  Method: `DELETE`<br/>
  Endpoint: `/events/:eventname`<br/>
  Description: Delete an event by name<br/>
