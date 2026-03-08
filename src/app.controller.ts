@@ -1,12 +1,12 @@
-import { Controller, Get } from '@nestjs/common'
-import { ApiExcludeEndpoint, ApiTags } from '@nestjs/swagger'
+// import { Controller, Get } from '@nestjs/common'
+// import { ApiExcludeEndpoint, ApiTags } from '@nestjs/swagger'
 
-@ApiTags("start page")
-@Controller()
-export class AppController {
+// @ApiTags("start page")
+// @Controller()
+// export class AppController {
 
-  @Get()
-  getHello(): string {
-    return "hello"
-  }
-}
+//   @Get()
+//   getHello(): string {
+//     return "hello"
+//   }
+// }
