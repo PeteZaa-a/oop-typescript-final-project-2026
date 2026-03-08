@@ -1,13 +1,13 @@
 Base URL: `http://localhost:3000`
-------------------------------------------------------------------------------------------------------------------
+
 Event Model: .json
 {
-  "eventName": "string",
-  "date": "string",
-  "time": "string",
-  "location": "school | hotel | silom | home | Chulalongkorn University"
+"eventName": "string",
+"date": "string",
+"time": "string",
+"location": "school | hotel | silom | home | Chulalongkorn University"
 }
-------------------------------------------------------------------------------------------------------------------
+
 Participant Model: .json
 {
   "id": "string (UUID)",
@@ -17,28 +17,27 @@ Participant Model: .json
   "status": "confirmed | cancelled | pending",
   "joinEvent": "string (event name)"
 }
-------------------------------------------------------------------------------------------------------------------
+
 API Response Model: .json
 {
   "success": "boolean",
   "message": "string",
   "data": "T | null"
 }
-------------------------------------------------------------------------------------------------------------------
-/////////////Endpoints//////////
+
 Events Module:
 1. Get All Events
- Method: `GET`
- Endpoint: `/events`
- Description: Retrieve all events
- Parameters:None
-------------------------------------------------------------------------------------------------------------------
+Method: `GET`
+Endpoint: `/events`
+Description: Retrieve all events
+Parameters:None
+
 2. Get Event by Name
  Method: `GET`
  Endpoint: `/events/:eventname`
  Description: Retrieve a specific event by name
  Parameters:`eventname` (path, string): The name of the event
- ------------------------------------------------------------------------------------------------------------------
+
  3. Create New Event
  Method: `POST`
  Endpoint: `/events`
@@ -50,7 +49,7 @@ Events Module:
     "time": "string (required)",
     "location": "school | hotel | silom | home | Chulalongkorn University (required)"
   }
- ------------------------------------------------------------------------------------------------------------------
+ 
  4. Update Event
  Method: `PATCH`
  Endpoint: `/events`
@@ -62,13 +61,13 @@ Events Module:
     "time": "string",
     "location": "school | hotel | silom | home | Chulalongkorn University"
 }
- ------------------------------------------------------------------------------------------------------------------
+ 
  5. Delete Event
  Method: `DELETE`
  Endpoint: `/events/:eventname`
  Description: Delete an event by name
  Parameters:`eventname` (path, string): The name of the event to delete
- ------------------------------------------------------------------------------------------------------------------
+ 
  Participants Module
  1. Create Participant
  Method: `POST`
@@ -82,13 +81,13 @@ Events Module:
     "status": "confirmed | cancelled | pending (required)",
     "joinEvent": "string (required)"
 }
-------------------------------------------------------------------------------------------------------------------
+
  2. Get Participant by ID
  Method: `GET`
  Endpoint:`/participants/:id`
  Description:  Retrieve a specific participant by ID
  Parameters:`id` (path, string): The UUID of the participant
-------------------------------------------------------------------------------------------------------------------
+
 3. Update Participant (Full)
 Method: `PUT`
 Endpoint: `/participants/:id`
@@ -102,7 +101,7 @@ Request Body:(All fields required) .json
     "status": "confirmed | cancelled | pending (required)",
     "joinEvent": "string (required)"
 }
-------------------------------------------------------------------------------------------------------------------
+
 4. Update Participant (Partial)
 Method: `PATCH`
 Endpoint: `/participants/:id`
@@ -115,7 +114,7 @@ Request Body:(All fields optional) .json
     "sex": "male | female | other",
     "status": "confirmed | cancelled | pending"
 }
-------------------------------------------------------------------------------------------------------------------
+
 5. Delete Participant
 Method: `DELETE`
 Endpoint: `/participants/:id`
@@ -126,13 +125,13 @@ Response: No content
 Error Response:
 Status: 404
 Message: ไม่พบข้อมูลที่จะลบ (Not found data to delete)
-------------------------------------------------------------------------------------------------------------------
+
 6. Get Participants by Event
 Method: `GET`
 Endpoint: `/participants/events/:eventname`
 Description: Get all participants for a specific event
 Parameters: `eventname` (path, string): The name of the event
-------------------------------------------------------------------------------------------------------------------
+
 7. Filter Participants
 Method:`GET`
 Endpoint: `/participants`
