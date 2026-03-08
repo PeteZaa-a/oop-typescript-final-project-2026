@@ -2,6 +2,8 @@ import { Controller, Get, Post, Put, Patch, Delete, Body, Param, HttpCode, HttpS
 import { ParticipantService } from './participant.service';
 import { CreateParticipantDto, updateParticipantDto } from './dto/participant.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiResponse } from '@/common/interfaces/ApiResponse.Interfaces';
+import { IParticipant } from './interface/participant.interface';
 
 
 @ApiTags('participants')
@@ -12,7 +14,7 @@ export class ParticipantController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'สร้างผู้เข้าร่วมใหม่' })
-  async create(@Body() dto: CreateParticipantDto) {
+  async create(@Body() dto: CreateParticipantDto): Promise<ApiResponse<CreateParticipantDto>> {
     const createdParticipant = await this.participantService.create(dto)
     return {
       success: true,
@@ -23,7 +25,7 @@ export class ParticipantController {
 
   @Get(':id')
   @ApiOperation({ summary: 'ดึงข้อมูลผู้เข้าร่วมตาม ID' })
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string): Promise<ApiResponse<CreateParticipantDto>> {
     const getId = await this.participantService.findOne(id);
     return {
       success: true,
@@ -34,7 +36,7 @@ export class ParticipantController {
 
   @Put(':id')
   @ApiOperation({ summary: 'อัปเดตข้อมูลผู้เข้าร่วมทั้งหมดตาม ID' })
-  async update(@Param('id') id: string, @Body() dto: CreateParticipantDto) {
+  async update(@Param('id') id: string, @Body() dto: CreateParticipantDto): Promise<ApiResponse<CreateParticipantDto>> {
     const updateAllId = await this.participantService.update(id, dto);
     return {
       success: true,
@@ -45,7 +47,7 @@ export class ParticipantController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'อัปเดตข้อมูลผู้เข้าร่วมบางส่วนตาม ID' })
-  async partialUpdate(@Param('id') id: string, @Body() dto: updateParticipantDto) {
+  async partialUpdate(@Param('id') id: string, @Body() dto: updateParticipantDto): Promise<ApiResponse<updateParticipantDto>> {
     const partialUpdateId = await this.participantService.partialUpdate(id, dto);
     return {
       success: true,
@@ -55,20 +57,20 @@ export class ParticipantController {
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'ลบผู้เข้าร่วมตาม ID' })
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string): Promise<ApiResponse<string>> {
    const delParticipants = await this.participantService.remove(id);
    return {
      success: true,
      message: `successful to delete participant with id: ${id}`,
-     data: delParticipants
+     data: delParticipants.message
    }
   }
 
   @Get('events/:eventname')
   @ApiOperation({ summary: "see people join event" })
-  async getByEvent(@Param("eventname") eventname: string) {
+  async getByEvent(@Param("eventname") eventname: string): Promise<ApiResponse<IParticipant[]>> {
     const getPeopleInEvent = await this.participantService.findParticipantsByEvent(eventname);
     return {
       success: true,
@@ -83,7 +85,7 @@ export class ParticipantController {
     @Query("event") eventname?: string,
     @Query("sex") sex?: string,
     @Query("status") status?: string,
-  ) {
+  ): Promise<ApiResponse<IParticipant[]>> {
     const query = await this.participantService.findWithFilter(eventname, sex, status) 
       return {
         success: true,
