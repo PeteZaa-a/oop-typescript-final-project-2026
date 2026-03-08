@@ -5,7 +5,7 @@ export enum participantSex {
 }
 
 export enum participantStatus {
-    CONFIRMED = "confirmed",
-    CANCELLED = "cancelled",
+    CONFIRMED = "confirm",
+    CANCELLED = "cancel",
     PENDING = "pending"
 }
