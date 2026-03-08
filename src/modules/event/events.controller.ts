@@ -38,7 +38,7 @@ export class EventsController {
     const updateData = await this.eventsService.update(eventname, updateDto)
     return {
       success: true,
-      message: updated events ${eventname} successful,
+      message: `updated events ${eventname} successful`,
       data: updateData
     }
   }
@@ -48,7 +48,7 @@ export class EventsController {
     const delEvent = await this.eventsService.remove(eventname)
     return {
       success: true,
-      message: deleted events ${eventname} successful,
+      message: `deleted events ${eventname} successful`,
       data: delEvent
     }
   }
@@ -57,7 +57,7 @@ export class EventsController {
     const getEventFromName = await this.eventsService.getEventsByName(eventname)
     return {
       success: true,
-      message: success to get ${eventname},
+      message: `success to get ${eventname}`,
       data: getEventFromName
     }
   }

@@ -49,7 +49,7 @@ async create(DtoEvent: createDtoEvent): Promise<createDtoEvent> {
     const index = event.findIndex((e: createDtoEvent) => e.eventName === eventname)
 
     if (index === -1) {
-      throw new NotFoundException(cannot find ${eventname} to update)
+      throw new NotFoundException(`cannot find ${eventname} to update`)
     }
 
     const updatedEvent: createDtoEvent = {
@@ -83,7 +83,7 @@ async getEventsByName(eventname: string): Promise<createDtoEvent> {
     const event = events.find(e => e.eventName.trim() === eventname.trim())
 
     if (!event) {
-      throw new NotFoundException(ืcannot find ${eventname})
+      throw new NotFoundException(`cannot find ${eventname}`)
     }
     return event
   }
