@@ -43,8 +43,8 @@ async create(DtoEvent: createDtoEvent): Promise<createDtoEvent> {
       throw new InternalServerErrorException("cannot create events")
     }
   }
-// ใช้ชื่อกิจกรรม (เลือกกิจกรรม) เพื่อไปเปลี่ยนข้อมูลอื่น
-  async update(eventname: string, updateDto: UpdateDtoEvent): Promise<createDtoEvent> {
+// ใช้ชื่อกิจกรรม (เลือกกิจกรรม) เพื่อไปเปลี่ยนข้อมูลอื่น ใช้กับอัพเดททั้งหมด(Put) และอัพเดทบางอัน(Patch)
+  async update(eventname: string, updateDto: UpdateDtoEvent | createDtoEvent): Promise<createDtoEvent> {
     const event = await this.findAll()
     const index = event.findIndex((e: createDtoEvent) => e.eventName === eventname)
 
@@ -60,7 +60,7 @@ async create(DtoEvent: createDtoEvent): Promise<createDtoEvent> {
     event[index] = updatedEvent
 
     const toString = JSON.stringify(event, null, 2)
-    fs.writeFileSync(this.databasePath, toString, "utf-8")
+    await fs.writeFileSync(this.databasePath, toString, "utf-8")
     return event[index]
   }
 async remove(eventName: string) {

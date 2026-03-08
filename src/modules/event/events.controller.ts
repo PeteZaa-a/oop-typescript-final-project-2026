@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Patch, Param, Delete } from "@nestjs/common";
+import { Body, Controller, Get, Post, Patch, Param, Delete, Put } from "@nestjs/common";
 import { createDtoEvent } from "./dto/create.event.dto"
 import { EventsService } from "./events.service";
 import { UpdateDtoEvent } from "./dto/update.event.dto";
@@ -19,7 +19,8 @@ export class EventsController {
       data: getData
     }
   }
-@ApiOperation({ summary: "create new events" })
+
+  @ApiOperation({ summary: "create new events" })
   @Post()
   async createEvent(@Body() createDtoEvent: createDtoEvent) {
     const createData = await this.eventsService.create(createDtoEvent)
@@ -29,7 +30,8 @@ export class EventsController {
       data: createData
     }
   }
-@ApiOperation({ summary: "update events" })
+  
+  @ApiOperation({ summary: "update events (แก้บางอัน)" })
   @Patch(":eventname")
   async update(
     @Param("eventname") eventname: string,
@@ -42,7 +44,22 @@ export class EventsController {
       data: updateData
     }
   }
-@ApiOperation({ summary: "delete events" })
+
+  @ApiOperation({ summary: "update events (แก้ทั้งหมด)" })
+  @Put(":eventname")
+  async updatAll(
+    @Param("eventname") eventname: string,
+    @Body() updateDto: createDtoEvent
+  ) {
+    const result = await this.eventsService.update(eventname, updateDto)
+    return {
+      success: true,
+      message: `success to update all ${eventname} data`,
+      data: result
+    }
+  }
+
+  @ApiOperation({ summary: "delete events" })
   @Delete(":eventname")
   async remove(@Param("eventname") eventname: string) {
     const delEvent = await this.eventsService.remove(eventname)
@@ -52,7 +69,9 @@ export class EventsController {
       data: delEvent
     }
   }
-@Get(":eventname")
+
+  @ApiOperation({ summary: "get event by name" })
+  @Get(":eventname")
   async getEventsByName(@Param("eventname") eventname: string) {
     const getEventFromName = await this.eventsService.getEventsByName(eventname)
     return {
