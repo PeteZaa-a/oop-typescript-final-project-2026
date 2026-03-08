@@ -67,7 +67,7 @@ export class EventsController {
 
   @ApiOperation({ summary: "delete events" })
   @Delete(":eventname")
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @HttpCode(HttpStatus.OK)
   async remove(@Param("eventname") eventname: string): Promise<ApiResponse<string>> {
     const delEvent = await this.eventsService.remove(eventname)
     return {
